@@ -4,7 +4,6 @@
   "description": "This is the back-end for a subscription-based website that allows users to translate books into their native language.",
   "main": "server.js",
   "scripts": {
-    "dev": "./node_modules/nodemon/bin/nodemon.js server.js",
     "start": "node server.js"
   },
   "keywords": [
