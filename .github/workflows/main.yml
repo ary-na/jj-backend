@@ -1,0 +1,29 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        echo -e "Host ec2-instance\n\tHostName ${{ secrets.EC2_HOST }}\n\tUser ${{ secrets.EC2_USER }}\n\tIdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
+
+    - name: Copy files to EC2
+      run: |
+        scp -r ./* ec2-instance:/home/${{ secrets.EC2_USER }}/app
+
+    - name: Execute deployment script
+      run: |
+        ssh ec2-instance "cd /home/${{ secrets.EC2_USER }}/app && ./deploy.sh"
