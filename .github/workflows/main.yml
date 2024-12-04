@@ -37,3 +37,4 @@ jobs:
     - name: Execute deployment script
       run: |
         ssh ec2-instance "cd /home/${{ secrets.EC2_USER }}/app && ./deploy.sh"
+        
