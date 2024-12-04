@@ -26,4 +26,4 @@ jobs:
     # Step 3: Run deployment script on EC2
     - name: Execute deployment script
       run: |
-        ssh ec2-instance "cd /home/${{ secrets.EC2_USER }}/jj-backend && ./deploy.sh && nohup npm start &"
+        ssh ec2-instance "cd /home/${{ secrets.EC2_USER }}/jj-backend && ./deploy.sh"
