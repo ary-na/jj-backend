@@ -23,8 +23,7 @@ jobs:
         ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
         echo -e "Host ec2-instance\n\tHostName ${{ secrets.EC2_HOST }}\n\tUser ${{ secrets.EC2_USER }}\n\tIdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
 
-    # Step 4: Run deployment script on EC2
+    # Step 3: Run deployment script on EC2
     - name: Execute deployment script
       run: |
-        ssh ec2-instance "cd /home/${{ secrets.EC2_USER }}/jj-backend && ./deploy.sh && npm start &"
-        
+        ssh ec2-instance "cd /home/${{ secrets.EC2_USER }}/jj-backend && ./deploy.sh && nohup npm start &"
