@@ -36,7 +36,9 @@ app.use(
 // - Homepage route
 app.use("/", homeRouter);
 
+const port = process.env.PORT;
+
 // Run app (Listen on port) ----------------------------------------------------
-app.listen(3000, '0.0.0.0', () => {
+app.listen(port, () => {
   console.log(`The app is running on port ${port}.`);
 });
