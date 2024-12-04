@@ -28,3 +28,4 @@ jobs:
       run: |
         ssh ec2-instance "cd /home/${{ secrets.EC2_USER }}/jj-backend && ./deploy.sh && npm start & npx wait-on http://localhost:3000"
         
+        
