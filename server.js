@@ -15,7 +15,7 @@ dotenv.config();
 const uri = process.env.DB_URI;
 
 mongoose
-  .connect(uri)
+  .connect(uri, {dbName: 'jj-backend'})
   .then(() => console.log("Connected to DocumentDB."))
   .catch((error) => {
     console.error("Connection error:", error.message);
