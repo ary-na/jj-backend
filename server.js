@@ -15,7 +15,7 @@ dotenv.config();
 const uri = process.env.DB_URI;
 
 mongoose
-  .connect(uri, {dbName: 'jj-backend'})
+  .connect(uri)
   .then(() => console.log("Connected to DocumentDB."))
   .catch((error) => {
     console.error("Connection error:", error.message);
@@ -54,3 +54,4 @@ const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`The app is running on port ${port}.`);
 });
+
