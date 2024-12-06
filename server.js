@@ -28,7 +28,7 @@ const app = express();
 app.use(express.static("assets"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("*", cors());
+app.use(cors());
 app.use(
   fileUpload({
     limits: { fileSize: 50 * 1024 * 1024 },
@@ -39,7 +39,7 @@ app.use(
 app.use('/', homeRouter)
 
 // - Auth route
-app.use("/auth", authRouter);
+// app.use("/auth", authRouter);
 
 // - User route
 app.use("/user", userRouter);
