@@ -10,11 +10,14 @@ const router = Router();
 router.get("/", async (req, res) => {
   try {
     // Respond with a welcome message
-    res.status(200).send("Welcome to JJ");
+    return res.status(200).json({ message: "Welcome to JJ" });
   } catch (error) {
     // Handle unexpected errors
     console.error("Error handling the request:", error);
-    res.status(500).send("An error occurred. Please try again later.");
+    return res.status(500).json({
+      error: error.message,
+      message: "An error occurred. Please try again later.",
+    });
   }
 });
 
