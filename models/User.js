@@ -4,7 +4,6 @@
 import "mongoose-type-email";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";  // bcryptjs for password hashing
-import { Schema } from "mongoose";
 
 // User Schema definition
 const UserSchema = new mongoose.Schema(

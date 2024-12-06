@@ -3,7 +3,7 @@
 // Setup dependencies for user routes.
 import { Router } from "express";
 const router = Router();
-import User from "../models/User";
+import User from "../models/User.js";
 
 // GET -------------------------------------------------------------------------
 // @route   /user
