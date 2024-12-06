@@ -10,6 +10,7 @@ import homeRouter from "./routes/home.js"
 import userRouter from "./routes/user.js";
 import authRouter from "./routes/auth.js";
 
+
 // Database configuration
 dotenv.config();
 const uri = process.env.DB_URI;
