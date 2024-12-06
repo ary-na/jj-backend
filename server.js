@@ -36,6 +36,16 @@ app.use(
 // - Homepage route
 app.use("/", homeRouter);
 
+// - Auth route
+app.use("/auth", authRouter);
+
+// - User route
+app.use("/user", userRouter);
+
+// - Book route
+app.use("/book", bookRouter);
+
+
 const port = process.env.PORT;
 
 // Run app (Listen on port) ----------------------------------------------------
