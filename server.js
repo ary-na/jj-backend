@@ -7,6 +7,9 @@ import cors from "cors";
 import fileUpload from "express-fileupload";
 import dotenv from "dotenv";
 import homeRouter from "./routes/home.js";
+import userRouter from "./routes/user.js";
+import authRouter from "./routes/auth.js";
+import bookRouter from "./routes/book.js";
 
 // Database configuration
 dotenv.config();
