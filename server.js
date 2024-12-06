@@ -6,7 +6,6 @@ import express from "express";
 import cors from "cors";
 import fileUpload from "express-fileupload";
 import dotenv from "dotenv";
-import homeRouter from "./routes/home.js";
 import userRouter from "./routes/user.js";
 import authRouter from "./routes/auth.js";
 import bookRouter from "./routes/book.js";
@@ -29,7 +28,7 @@ const app = express();
 app.use(express.static("assets"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use("*", cors());
 app.use(
   fileUpload({
     limits: { fileSize: 50 * 1024 * 1024 },
@@ -37,7 +36,8 @@ app.use(
 );
 
 // - Homepage route
-app.use("/", homeRouter);
+const homeRouter = require("./routes/home")
+app.use('/', homeRouter)
 
 // - Auth route
 app.use("/auth", authRouter);
