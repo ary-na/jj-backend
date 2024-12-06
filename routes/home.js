@@ -1,10 +1,10 @@
 // @file    ./routes/home.js
 
 // Import necessary modules
-import { express } from "express";
+import { Router } from "express";
 
 // Initialize the router
-const router = express.Router();
+const router = Router();
 
 // Define the root route
 router.get("/", async (req, res) => {
@@ -37,4 +37,4 @@ router.get("/test", async (req, res) => {
 });
 
 // Export the router object as a module.
-module.exports = router
+export default router;
