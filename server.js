@@ -6,10 +6,10 @@ import express from "express";
 import cors from "cors";
 import fileUpload from "express-fileupload";
 import dotenv from "dotenv";
-import homeRouter from "./routes/home.js"
+import homeRouter from "./routes/home.js";
 import userRouter from "./routes/user.js";
+import bookRouter from "./routes/book.js";
 import authRouter from "./routes/auth.js";
-
 
 // Database configuration
 dotenv.config();
@@ -37,17 +37,16 @@ app.use(
 );
 
 // - Homepage route
-app.use('/', homeRouter)
+app.use("/", homeRouter);
 
 // - Auth route
-// app.use("/auth", authRouter);
+app.use("/auth", authRouter);
 
 // - User route
 app.use("/user", userRouter);
 
 // - Book route
-// app.use("/book", bookRouter);
-
+app.use("/book", bookRouter);
 
 const port = process.env.PORT;
 
@@ -55,4 +54,3 @@ const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`The app is running on port ${port}.`);
 });
-
