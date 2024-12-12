@@ -21,20 +21,5 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Define the root route
-router.get("/test", async (req, res) => {
-  try {
-    // Respond with a welcome message
-    return res.status(200).json({ message: "hahahahah to JJ" });
-  } catch (error) {
-    // Handle unexpected errors
-    console.error("Error handling the request:", error);
-    return res.status(500).json({
-      error: error.message,
-      message: "An error occurred. Please try again later.",
-    });
-  }
-});
-
 // Export the router object as a module.
 export default router;
