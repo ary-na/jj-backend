@@ -4,12 +4,13 @@
 import { Router } from "express";
 const router = Router();
 import User from "../models/User.js";
+import AuthService from "../services/AuthService.js";
 
 // GET -------------------------------------------------------------------------
 // @route   /user
 // @desc    Get all users.
 // @access  Private
-router.get("/", async (req, res) => {
+router.get("/", AuthService.authenticateToken, async (req, res) => {
   try {
     // Fetch all users from the User model
     const users = await User.find();
@@ -65,7 +66,7 @@ router.post("/", async (req, res) => {
 // @route   /user/:id
 // @desc    Delete a user by id.
 // @access  Private
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", AuthService.authenticateToken, async (req, res) => {
   try {
     const { id } = req.params;
 
