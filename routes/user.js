@@ -30,13 +30,13 @@ router.get("/", AuthService.authenticateToken, async (req, res) => {
 // @access  Public
 router.post("/", async (req, res) => {
   try {
-    const { firstName, lastName, email, password, accessLevel } = req.body;
+    const { name, email, password } = req.body;
 
     // Validate required fields
-    if (!firstName || !lastName || !email || !password || !accessLevel) {
+    if (!name || !email || !password) {
       return res.status(400).json({
         message:
-          "First name, last name, email, password, and access level are required!",
+          "Name, email, and password are required!",
       });
     }
 
