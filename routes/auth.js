@@ -5,6 +5,7 @@ import { Router } from "express";
 import User from "../models/User.js";
 import AuthService from "../services/AuthService.js";
 
+
 // Initialize the router
 const router = Router();
 
