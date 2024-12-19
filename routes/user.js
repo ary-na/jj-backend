@@ -10,7 +10,7 @@ import AuthService from "../services/AuthService.js";
 // @route   /user
 // @desc    Get all users.
 // @access  Private
-router.get("/", AuthService.authenticateToken, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     // Fetch all users from the User model
     const users = await User.find();
@@ -66,7 +66,7 @@ router.post("/", async (req, res) => {
 // @route   /user/:id
 // @desc    Delete a user by id.
 // @access  Private
-router.delete("/:id", AuthService.authenticateToken, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
 

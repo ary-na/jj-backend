@@ -1,5 +1,7 @@
-import { sign, verify } from "jsonwebtoken";
-const bcrypt = require("bcrypt");
+import pkg from 'jsonwebtoken';
+import bcrypt from "bcryptjs";
+
+const { sign, verify } = pkg;
 
 class AuthService {
   /**
@@ -26,39 +28,44 @@ class AuthService {
    * @param {Object} res - HTTP response object.
    * @param {Function} next - Function to pass control to the next middleware.
    */
-  static authenticateToken(req, res, next) {
+  static async authenticateToken(req, res, next) {
     try {
       const authHeader = req.headers["authorization"];
       const token = authHeader && authHeader.split(" ")[1];
-
-      // If no token is found, return unauthorized.
+  
+      // If no token is found, return unauthorized with a meaningful message.
       if (!token) {
         return res
           .status(401)
           .json({ message: "Unauthorized! Token is missing." });
       }
-
-      // Verify the token.
-      verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-        if (err) {
-          const errorMessage =
-            err.name === "TokenExpiredError"
-              ? "Unauthorized! Token has expired."
-              : "Unauthorized! Invalid token.";
-          return res.status(401).json({ message: errorMessage });
+  
+      // Verify the token using Promise-based syntax.
+      try {
+        const decoded = await verify(token, process.env.ACCESS_TOKEN_SECRET);
+  
+        if (!decoded || !decoded.user) {
+          return res.status(401).json({ message: "Unauthorized! Invalid token data." });
         }
-
+  
         // Attach user info to the request object and proceed.
         req.user = decoded.user; // Assuming `user` is the key in your token payload.
         next();
-      });
+      } catch (err) {
+        const errorMessage =
+          err.name === "TokenExpiredError"
+            ? "Unauthorized! Token has expired."
+            : "Unauthorized! Invalid token.";
+        return res.status(401).json({ message: errorMessage });
+      }
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         message: "An error occurred during token authentication.",
-        error: error.message,
+        error: error.message || "Unknown error",
       });
     }
   }
+
   /**
    * Hashes a plain-text password.
    * @param {String} password - The plain-text password to hash.

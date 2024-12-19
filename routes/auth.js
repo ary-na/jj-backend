@@ -68,7 +68,7 @@ router.post('/login', async (req, res) => {
 // @route   /validate
 // @desc    Validate Login.
 // @access  Public
-router.get('/validate', AuthService.authenticateToken, async (req, res) => {
+router.get('/validate', async (req, res) => {
     // After the token is verified, the user info is available on req.user
     try {
         const user = await User.findById(req.user._id);
