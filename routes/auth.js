@@ -8,7 +8,6 @@ import AuthService from "../services/AuthService.js";
 // Initialize the router
 const router = Router();
 
-
 // POST ------------------------------------------------------------------------
 // @route   /login
 // @desc    Login.
