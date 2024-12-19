@@ -3,7 +3,7 @@
 // Setup dependencies
 import "mongoose-type-email";
 import mongoose from "mongoose";
-import AuthService from "../services/AuthService";
+import AuthService from "../services/AuthService.js";
 
 // User Schema definition
 const UserSchema = new mongoose.Schema(
