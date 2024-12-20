@@ -1,4 +1,4 @@
-import pkg from 'jsonwebtoken';
+import pkg from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
 const { sign, verify } = pkg;
@@ -11,7 +11,7 @@ class AuthService {
    * @param {String} expiresIn - Token expiration time.
    * @returns {String} Signed JWT access token.
    */
-  static generateAccessToken(
+  generateAccessToken(
     user,
     secret = process.env.ACCESS_TOKEN_SECRET,
     expiresIn = "1d"
@@ -28,26 +28,28 @@ class AuthService {
    * @param {Object} res - HTTP response object.
    * @param {Function} next - Function to pass control to the next middleware.
    */
-  static async authenticateToken(req, res, next) {
+  async authenticateToken(req, res, next) {
     try {
       const authHeader = req.headers["authorization"];
       const token = authHeader && authHeader.split(" ")[1];
-  
+
       // If no token is found, return unauthorized with a meaningful message.
       if (!token) {
         return res
           .status(401)
           .json({ message: "Unauthorized! Token is missing." });
       }
-  
+
       // Verify the token using Promise-based syntax.
       try {
         const decoded = await verify(token, process.env.ACCESS_TOKEN_SECRET);
-  
+
         if (!decoded || !decoded.user) {
-          return res.status(401).json({ message: "Unauthorized! Invalid token data." });
+          return res
+            .status(401)
+            .json({ message: "Unauthorized! Invalid token data." });
         }
-  
+
         // Attach user info to the request object and proceed.
         req.user = decoded.user; // Assuming `user` is the key in your token payload.
         next();
@@ -71,7 +73,7 @@ class AuthService {
    * @param {String} password - The plain-text password to hash.
    * @returns {Promise<String>} - The hashed password.
    */
-  static async hashPassword(password) {
+  async hashPassword(password) {
     try {
       const salt = await bcrypt.genSalt(10); // Generate salt
       return await bcrypt.hash(password, salt); // Hash the password
@@ -86,7 +88,7 @@ class AuthService {
    * @param {String} hashedPassword - The hashed password to compare against.
    * @returns {Promise<Boolean>} - Whether the passwords match.
    */
-  static async comparePassword(candidatePassword, hashedPassword) {
+  async comparePassword(candidatePassword, hashedPassword) {
     try {
       return await bcrypt.compare(candidatePassword, hashedPassword);
     } catch (error) {
@@ -95,4 +97,4 @@ class AuthService {
   }
 }
 
-module.exports = AuthService; 
+export default new AuthService();
