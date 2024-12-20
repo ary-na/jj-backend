@@ -15,14 +15,14 @@ import authRouter from "./routes/auth.js";
 dotenv.config();
 const uri = process.env.DB_URI;
 
-// mongoose
-//   .connect(uri)
-//   .then(() => console.log("Connected to DocumentDB."))
-//   .catch((error) => {
-//     console.error("Connection error:", error.message);
-//     console.error("Full error object:", JSON.stringify(error, null, 2));
-//     console.error("Stack trace:", error.stack);
-//   });
+mongoose
+  .connect(uri)
+  .then(() => console.log("Connected to DocumentDB."))
+  .catch((error) => {
+    console.error("Connection error:", error.message);
+    console.error("Full error object:", JSON.stringify(error, null, 2));
+    console.error("Stack trace:", error.stack);
+  });
 
 // Express app setup
 const app = express();
