@@ -6,6 +6,7 @@ const router = Router();
 import User from "../models/User.js";
 import AuthService from "../services/AuthService.js";
 
+
 // GET -------------------------------------------------------------------------
 // @route   /user
 // @desc    Get all users.
