@@ -8,12 +8,7 @@ import AuthService from "../services/AuthService.js";
 // User Schema definition
 const UserSchema = new mongoose.Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-      trim: true, // Ensure no leading/trailing spaces
-    },
-    lastName: {
+    name: {
       type: String,
       required: true,
       trim: true, // Ensure no leading/trailing spaces
